@@ -1,0 +1,48 @@
+{%extends "users/base.html"%}
+{%block content%}
+<table class="table table-hover table-responsive">
+    <thead>
+     <tr>
+         <td>#</td>
+         <td>Airline</td>
+         <td>Biz-Model</td>
+         <td>Network</td>
+         <td>Group</td>
+         <td>Hub</td>
+         <td>Territory</td>
+         <td>Address</td>
+         <td>IATA Code</td>
+         <td>ICAO code</td>
+         <td>Ranking 2019</td>
+         <td>Ranking 2018</td>
+         <td>Rating</td>
+         <td>Source URL</td>
+         <td>Site URL</td>
+         <td>Image URL</td>
+     </tr>
+    </thead>
+    <tbody>
+
+    {%for item in data%}
+    <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.airline_name}}</td>
+        <td>{{item.biz_model}}</td>
+        <td>{{item.network}}</td>
+        <td>{{item.group}}</td>
+        <td>{{item.hub}}</td>
+        <td>{{item.territory}}</td>
+        <td>{{item.address}}</td>
+        <td>{{item.iata_code}}</td>
+        <td>{{item.icao_code}}</td>
+        <td>{{item.ranking}}</td>
+        <td>{{item.prevrank}}</td>
+        <td>{{item.ratingval}}</td>
+        <td><a href={{item.source_url}}>{{item.source_url}}</a></td>
+        <td><a href={{item.site_url}}>{{item.site_url}}</a></td>
+        <td><a href={{item.image_url}}>{{item.image_url}}</a></td>
+    </tr>
+    {%endfor%}
+    </tbody>
+</table>
+{%endblock%}

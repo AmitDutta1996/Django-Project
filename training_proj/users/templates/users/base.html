@@ -1,0 +1,63 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/500733f512.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{%static 'css/bootstrap-social.css'%}">
+    <script src="https://cdn.flexmonster.com/flexmonster.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!--    <link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">-->
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'home'%}">
+        Scraper</a>
+
+   {% if perms.scraper.change_scrapelinks %}
+    <a class="nav-item nav-link" href="{% url 'scraper'%}">Add Scrape Links</a>
+    <a class="nav-item nav-link" href="{% url 'scraperdata'%}">View Scrape Data</a>
+    {%endif%}
+  {%if user.is_authenticated%}
+    <a class="nav-item nav-link" href="{% url 'reviewstats'%}">View Scraped Review Statistics</a>
+     {%endif%}
+
+
+  <div class="collapse navbar-collapse" >
+
+  </div>
+    <div class="navbar-nav">
+      {%if user.is_authenticated%}
+      {%if request.path != '/profile/'%}
+      <a class="nav-item nav-link" href="{% url 'profile'%}"><img class="rounded-circle" src="{{user.profile.image.url}}" style="height: 35px;
+  width: 35px;
+  margin-right: 5px;">Hi,{{user.get_username}}!</a>
+      {%endif%}
+      <a class="nav-item nav-link" href="{% url 'logout'%}">Logout</a>
+      {% else %}
+      <a class="nav-item nav-link" href="{% url 'login'%}">Login</a>
+      <a class="nav-item nav-link" href="{% url 'register'%}">Sign Up</a>
+      {% endif %}
+    </div>
+</nav>
+    <div class="container">
+      {% if messages %}
+      {% for message in messages%}
+      <div class="alert alert-{{message.tags}}">
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+    {%block content%}
+      {%endblock%}
+    </div>
+  </body>
+</html>

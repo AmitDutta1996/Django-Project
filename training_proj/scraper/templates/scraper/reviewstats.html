@@ -1,0 +1,49 @@
+{%extends "users/base.html"%}
+{%block content%}
+<div id="pivot-table-container" data-url="{% url 'pivot_data' %}"></div>
+<script>
+    function processData(dataset) {
+    var result = []
+    dataset = JSON.parse(dataset);
+    console.log(dataset)
+    dataset.forEach(item => result.push(item.fields));
+    return result;
+}
+$.ajax({
+    url: $("#pivot-table-container").attr("data-url"),
+    dataType: 'json',
+    success: function(data) {
+        new Flexmonster({
+            container: "#pivot-table-container",
+            componentFolder: "https://cdn.flexmonster.com/",
+            width: "100%",
+            height: 650,
+            toolbar: true,
+            report: {
+                dataSource: {
+                    type: "json",
+                    data: processData(data),
+                    mapping: {
+                            "airline_name": {
+                                "caption": "Airline Name",
+                                "type": "string"
+                            },
+                            "polarity": {
+                                "caption": "Sentiment Polarity",
+                                "type": "number"
+                            },
+                            "subjectivity": {
+                                "caption": "Sentiment Subjectivity",
+                                "type": "number"
+                            }
+                        }
+                },
+                slice: {}
+            },
+            licenseKey: "Z7E3-XB4546-3A1T41-2K4H0K"
+        });
+
+    }
+});
+</script>
+{%endblock%}

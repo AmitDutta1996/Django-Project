@@ -1,0 +1,60 @@
+{%extends "users/base.html"%}
+{%block content%}
+<div class="row row-cols-1 row-cols-md-3">
+  {%for item in data%}
+  <div class="card-deck mt-5 mb-5">
+  <div class="col mb-4">
+<div class="card border-secondary">
+  <img src={{item.image_url}} class="card-img-top" alt="..." >
+<div class="card-body">
+    <h4 class="card-title">{{item.airline_name}}</h4>
+
+  <a class="btn btn-outline-info" data-toggle="collapse" href={{"#"|add:item.iata_code}} role="button" aria-expanded="false" aria-controls="multiCollapseExample1">More Info</a>
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id={{item.iata_code}}>
+
+      <small class="card-text">Business Model</small>
+      <h6 class="card-text">{{item.biz_model}}</h6>
+      <small class="card-text">Network</small>
+      <h6 class="card-text">{{item.network}}</h6>
+      <small class="card-text">Part of</small>
+      <h6 class="card-text">{{item.group}}</h6>
+      <small class="card-text">Main Hub</small>
+      <h6 class="card-text">{{item.hub}}</h6>
+      <small class="card-text">Country/Territory</small>
+      <h6 class="card-text">{{item.territory}}</h6>
+      <small class="card-text">Address</small>
+      <h6 class="card-text">{{item.address}}</h6>
+      <small class="card-text">IATA Code</small>
+      <h6 class="card-text">{{item.iata_code}}</h6>
+      <small class="card-text">ICAO Code</small>
+      <h6 class="card-text">{{item.icao_code}}</h6>
+    <small class="card-text">About</small>
+    <p class="card-text">{{item.about}}</p>
+      <small class="card-text">SKYTRAX 2019 Top 100 Ranking</small>
+      <h6 class="card-text">{{item.ranking}}</h6>
+      <small class="card-text">SKYTRAX 2018 Ranking</small>
+      <h6 class="card-text">{{item.prevrank}}</h6>
+      <small class="card-text">SKYTRAX Rating</small>
+      <h6 class="card-text">{{item.ratingval}}/5 Stars</h6>
+  </div>
+    </div>
+  </div>
+</div>
+  <div class="card-footer">
+      <a href="{{item.site_url}}" class="btn btn-outline-primary">Visit</a>
+    </div>
+</div>
+    </div>
+    </div>
+{%endfor%}
+</div>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="air-bot"
+  agent-id="069fc2d1-5f35-4aaa-b1f5-340eebb6ca29"
+  language-code="en"
+></df-messenger>
+{%endblock%}
